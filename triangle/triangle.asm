@@ -5,11 +5,22 @@ global _start
 section .text
   _start:
     mov rdx, out  ; rdx = next byte to write
-    mov r11, 1  ; number of chars to write
+    mov r11, 2  ; number of chars to write
     mov r12, 0  ; number of chars written so far
 
   writeLine:
-    mov byte [rdx], '\'  ; move char to rdx
+    cmp r12, 0  ; r12 vs 0
+    jne writeSlash  ; r12 != 0
+
+    writeVBar:
+      mov byte [rdx], '|'  ; move char to rdx
+      jmp actualWriteLine
+
+    writeSlash:
+      mov byte [rdx], '\'  ; move char to rdx
+      jmp actualWriteLine
+
+  actualWriteLine:
     inc rdx
     inc r12
     cmp r12, r11  ; comparison
@@ -36,16 +47,15 @@ section .text
 
 section .bss  ; writable data
   lineLimit equ 8
-  dataSize equ 44
+  dataSize equ 44  ; (8 + 1) * 8 / 2 + 8
   out:
     resb dataSize
 
 ; Result:
-; #
-; ##
-; ###
-; ####
-; #####
-; ######
-; #######
-; ########
+; |\
+; |\\
+; |\\\
+; |\\\\
+; |\\\\\
+; |\\\\\\
+; |\\\\\\\
