@@ -9,7 +9,7 @@ extern printf  ; C's printf function
 section .text
   main:
     push rbx  ; save the register
-    mov ecx, 20  ; amount of fib numbers to generate
+    mov cx, 20  ; amount of fib numbers to generate
     xor rax, rax  ; current number (0)
     xor rbx, rbx  ; next number (1)
     inc rbx  ; make it 1
@@ -35,7 +35,7 @@ section .text
     mov rax, rbx  ; move next to current
 
     add rbx, rdx  ; rbx += rdx
-    dec ecx  ; turn ends
+    dec cx  ; turn ends
     jnz turn  ; jump if non zero
 
     pop rbx  ; restore rbx before returning (basically freeing some memory)
