@@ -24,7 +24,7 @@ section .text
     ; current number
     mov rsi, rax
 
-    xor rax, rax  ; TODO I don't know what this line of code does.
+    xor rax, rax  ; TODO I don't know what this line of code does. Works without this line too.
 
     call printf  ; printf("%18ld\n", rax)
 
